@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLang } from './components.jsx'
 
@@ -6,29 +6,12 @@ import { useLang } from './components.jsx'
 export default function Card({ p, i = 0, hide }) {
   const { t } = useLang()
   const [ok, setOk] = useState(true)
-  const ref = useRef(null)
-  const [seen, setSeen] = useState(false)
-
-  // Reveal-on-scroll handled in React state. The old approach added the 'in'
-  // class straight to the DOM, and React wiped it whenever 'hide' toggled
-  // (project filters), leaving cards stuck at opacity 0 on phones.
-  useEffect(() => {
-    if (hide || seen) return
-    const el = ref.current
-    if (!el || typeof IntersectionObserver === 'undefined') { setSeen(true); return }
-    const io = new IntersectionObserver(es => {
-      if (es.some(e => e.isIntersecting)) { setSeen(true); io.disconnect() }
-    }, { threshold: 0.05 })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [hide, seen])
   const m = (p.desc || '').match(/^.*?[.!?](\s|$)/)
   const line = m ? m[0].trim() : p.desc
 
   return (
     <Link
-      ref={ref}
-      className={`pj rv${seen ? ' in' : ''}${hide ? ' hide' : ''}`}
+      className={hide ? 'pj rv hide' : 'pj rv'}
       to={`/projects/${p.id}`}
       style={{ transitionDelay: `${(i % 2) * 80}ms` }}
     >
