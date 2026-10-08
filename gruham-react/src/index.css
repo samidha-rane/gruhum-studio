@@ -405,3 +405,13 @@ html.js .pj.rv{transition-duration:.6s}
   .pj-go{display:none}
 }
 @media(prefers-reduced-motion:reduce){.pj-in,.pj-img img{transition:none}.pj:hover .pj-in{transform:none}.pj:hover .pj-img img{transform:none}}
+/* ---- Mobile fixes ---- */
+/* Keep the pinned 3D view compact so the option buttons stay usable on phones */
+@media(max-width:960px){
+  .cfg-view{height:34vh;min-height:220px;max-height:340px}
+  .cfg-cap{padding:.5em 1em;font-size:.85rem;flex-wrap:nowrap}
+  .cfg-cap span{white-space:nowrap}
+  .cfg-body{padding:1.2rem}
+}
+/* Filtered project cards must never stay invisible */
+.pj.rv.in{opacity:1;transform:none}
