@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom'
-import { BeforeAfter, Cta, Estimator, Faq, PageHead, PaySec, Ph, Quote, Srow, useLang, useSeo } from './components.jsx'
+import BeforeAfter from './BeforeAfter.jsx'
+import { Cta, Estimator, Faq, PageHead, PaySec, Ph, Quote, Srow, useLang, useSeo } from './components.jsx'
+import Card from './ProjectCard.jsx'
 import { FAQ, FORM, MATERIALS, POSTS, PROJ, QUIZ, QUOTES, RES, ROOMS, SERV, STEPS, TEAM } from './data.js'
 
 const Configurator = lazy(() => import('./Configurator.jsx'))
@@ -37,16 +39,6 @@ function RoomSection() {
       </div>
       <Suspense fallback={null}><Configurator /></Suspense>
     </div></section>
-  )
-}
-
-function Card({ p, i, hide }) {
-  return (
-    <Link className={hide ? 'pj rv hide' : 'pj rv'} to={`/projects/${p.id}`}>
-      <Ph name={`${p.id}-1.jpg`} alt={`${p.title}, ${p.type} interior in ${p.loc}`} k={i} ar="4/5" lb={false} />
-      <h3>{p.title}</h3>
-      <span className="meta">{p.type} &middot; {p.loc} &middot; {p.year}</span>
-    </Link>
   )
 }
 
@@ -185,6 +177,7 @@ export function Projects() {
     <>
       <PageHead eb="Portfolio">Spaces we have <em>made</em>.</PageHead>
       <section style={{ paddingTop: 30 }}><div className="w">
+        <p className="pj-intro rv">Every one of these began with a conversation about how people really live, cook, gather and rest. Have a look around.</p>
         <div className="filters rv">{['all', 'Residential', 'Commercial', 'Hospitality'].map(x => <button key={x} className={f === x ? 'on' : ''} onClick={() => setF(x)}>{x === 'all' ? 'All' : x}</button>)}</div>
         <div className="pgrid">{PROJ.map((p, i) => <Card key={p.id} p={p} i={i} hide={f !== 'all' && p.type !== f} />)}</div>
       </div></section>
