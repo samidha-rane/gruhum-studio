@@ -1,6 +1,4 @@
 import { useRef, useState } from 'react'
-
-// Before / After slider. Uses /images/before.jpg and /images/after.jpg
 export default function BeforeAfter({
   before = '/images/before.jpg',
   after = '/images/after.jpg',
