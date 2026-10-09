@@ -177,9 +177,8 @@ export function Projects() {
     <>
       <PageHead eb="Portfolio">Spaces we have <em>made</em>.</PageHead>
       <section style={{ paddingTop: 30 }}><div className="w">
-        <p className="pj-intro rv">Every one of these began with a conversation about how people really live, cook, gather and rest. Have a look around.</p>
         <div className="filters rv">{['all', 'Residential', 'Commercial', 'Hospitality'].map(x => <button key={x} className={f === x ? 'on' : ''} onClick={() => setF(x)}>{x === 'all' ? 'All' : x}</button>)}</div>
-        <div className="pgrid">{PROJ.map((p, i) => <Card key={p.id} p={p} i={i} hide={f !== 'all' && p.type !== f} />)}</div>
+        <div className="pgrid">{PROJ.map((p, i) => <Card key={p.id} p={p} i={i} n={PROJ.filter(q => f === 'all' || q.type === f).indexOf(p)} hide={f !== 'all' && p.type !== f} />)}</div>
       </div></section>
       <Cta />
     </>

@@ -375,33 +375,37 @@ nav a:not(.btn){font-size:.9rem;letter-spacing:.05em}
 .cmp-tag{position:absolute;bottom:16px;z-index:3;font:600 .7rem 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;background:var(--bg);color:var(--ink);padding:6px 12px;font-style:normal;pointer-events:none}
 .cmp-tag.l{left:16px}.cmp-tag.r{right:16px}
 
-/* ---- Project cards (ProjectCard.jsx) ---- */
-.pgrid{grid-template-columns:repeat(2,1fr);gap:44px 36px;align-items:stretch}
-.pgrid .pj:nth-child(even){margin-top:0}
-html.js .pj.rv{transition-duration:.6s}
-.pj{display:block;color:var(--ink)}
-.pj-in{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease}
-.pj:hover .pj-in,.pj:focus-visible .pj-in{transform:translateY(-4px);box-shadow:0 22px 44px -24px rgba(0,45,114,.45)}
+/* ---- Project cards (ProjectCard.jsx): editorial layout ---- */
+.pgrid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:36px;row-gap:64px;align-items:start}
+.pgrid .pj{display:block;color:var(--ink)}
+.pgrid .pj.wide{grid-column:span 7;margin-top:0}
+.pgrid .pj.slim{grid-column:span 5;margin-top:56px}
+html.js .pj{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+html.js .pj.vis{opacity:1;transform:none}
+.pgrid .pj.hide{display:none}
 .pj-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:#EADFC0}
-.pj-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.pj-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
 .pj:hover .pj-img img{transform:scale(1.03)}
-.pj-type{position:absolute;left:14px;top:14px;z-index:2;font:600 .68rem 'DM Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,248,225,.95);color:var(--ink);padding:6px 12px;border-radius:99px}
-.pj-body{display:flex;flex-direction:column;gap:10px;flex:1;padding:22px 24px 22px}
-.pj-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.pj .pj-top h3{margin:0;font-size:1.55rem;line-height:1.15}
-.pj-no{flex:none;font-family:var(--s);font-style:italic;font-size:1rem;color:var(--acc)}
-.pj-desc{margin:0;color:var(--mut);font-size:.95rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pj-foot{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
-.pj-foot .meta{flex:1;min-width:0;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pj-pal{display:flex;gap:5px;flex:none}
-.pj-pal i{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
-.pj-go{flex:none;font:600 .72rem 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
-.pj-intro{max-width:560px;margin:-6px 0 30px;color:var(--mut);font-size:1.05rem}
-@media(max-width:1000px){.pj-go{display:none}}
-@media(max-width:760px){
-  .pgrid{grid-template-columns:1fr;gap:26px}
-  .pj-body{padding:18px 18px 18px}
-  .pj .pj-top h3{font-size:1.4rem}
-  .pj-go{display:none}
+.pj-cap{padding-top:16px}
+.pj-cap .meta{display:block;font:600 .72rem 'DM Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.pj h3{margin:10px 0 6px;font-size:clamp(1.5rem,2.3vw,2.05rem);line-height:1.12}
+.pj h3 i{font-style:normal;display:inline-block;margin-left:12px;color:var(--acc);opacity:0;transform:translateX(-10px);transition:opacity .3s,transform .3s}
+.pj:hover h3 i,.pj:focus-visible h3 i{opacity:1;transform:none}
+.pj-cap p{margin:0;max-width:46ch;color:var(--mut);font-size:.96rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media(max-width:1000px){
+  .pgrid{column-gap:28px;row-gap:48px}
+  .pgrid .pj.wide,.pgrid .pj.slim{grid-column:span 6;margin-top:0}
 }
-@media(prefers-reduced-motion:reduce){.pj-in,.pj-img img{transition:none}.pj:hover .pj-in{transform:none}.pj:hover .pj-img img{transform:none}}
+@media(max-width:760px){
+  .pgrid{grid-template-columns:1fr;row-gap:40px}
+  .pgrid .pj.wide,.pgrid .pj.slim{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){html.js .pj{opacity:1;transform:none;transition:none}.pj-img img,.pj h3 i{transition:none}.pj:hover .pj-img img{transform:none}}
+
+/* ---- 3D tour on phones: smaller room view, action buttons always reachable ---- */
+@media(max-width:960px){
+  .cfg{--v3d:clamp(210px,32vh,300px)}
+  .cfg-view{top:var(--hh,76px);height:var(--v3d);min-height:0}
+  .cfg-actions{position:sticky;bottom:0;z-index:6;gap:8px;padding:10px 84px 10px 14px;background:#fff8e1;border-top:1px solid var(--line);box-shadow:0 -8px 20px rgba(0,45,114,.12)}
+  .cfg-actions .btn{padding:11px 10px;font-size:.72rem}
+}
