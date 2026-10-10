@@ -4,8 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { TONES, applyConfig, buildRoom, createMaterials, disposeGroup } from './spaces.js'
 
 const LIGHT = {
-  day: { hemi: 0.95, sun: 1.5, sunColor: '#fff0d0', lamp: 4, glow: 1, bg: '#f6d9a0' },
-  evening: { hemi: 0.35, sun: 0.6, sunColor: '#ff9a55', lamp: 20, glow: 1.9, bg: '#17284a' },
+  day: { hemi: 0.95, sun: 1.5, sunColor: '#fff0d0', lamp: 4, glow: 1, bg: '#F2E3E6' },
+  evening: { hemi: 0.35, sun: 0.6, sunColor: '#ff9a55', lamp: 20, glow: 1.9, bg: '#3F2D36' },
 }
 
 const Space3D = forwardRef(function Space3D({ type, room, cfg, tour }, ref) {

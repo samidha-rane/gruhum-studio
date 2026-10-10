@@ -47,7 +47,7 @@ export function Cta() {
   const { t } = useLang()
   return (
     <section className="dk"><div className="w rv">
-      <span className="eb" style={{ color: '#F9A825' }}>{t('Start here')}</span>
+      <span className="eb" style={{ color: '#FAC8CE' }}>{t('Start here')}</span>
       <h2>Let us talk about <em>your</em> space.</h2>
       <p className="lead">A free 30-minute consultation. No pressure, just a good conversation.</p>
       <p style={{ marginTop: 32 }}><Link className="btn gold" to="/contact">{t('Transform your space')}</Link></p>
@@ -61,7 +61,7 @@ export function Srow({ n, t, d }) {
 
 export function PaySec() {
   return (
-    <section style={{ background: '#FDEFC0' }}><div className="w">
+    <section style={{ background: '#E7E4E6' }}><div className="w">
       <div className="rv" style={{ marginBottom: 40 }}><span className="eb">Transparent payments</span><h2>What you pay, and when</h2></div>
       {PAY.map(([a, b, c]) => <Srow key={b} n={a} t={b} d={c} />)}
     </div></section>
@@ -114,7 +114,7 @@ export function Estimator() {
         <div><label>Finish</label>{grp('fin', [['Essential', 0], ['Signature', 1], ['Luxe', 2]])}</div>
       </div>
       <div className="eres">
-        <span className="eb" style={{ color: '#F9A825' }}>Indicative estimate</span>
+        <span className="eb" style={{ color: '#FAC8CE' }}>Indicative estimate</span>
         <b className="eamt">₹{lakh(b * 0.9)} to {lakh(b * 1.15)} lakh</b>
         <p>A rough range only. The final quote depends on site conditions, materials and your design choices.</p>
         <Link className="btn" to="/contact">Get an exact quote</Link>

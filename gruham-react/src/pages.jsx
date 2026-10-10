@@ -13,7 +13,7 @@ const SLIDES = [
   { word: 'offices', rest: 'people enjoy working in.', img: 'hero-office.jpg', alt: 'Calm daylit office with timber desks and plants' },
   { word: 'courtyards', rest: 'where the whole family gathers.', img: 'hero-courtyard.jpg', alt: 'Indoor courtyard filled with tropical plants and curved seating' },
 ]
-const TINT = { background: '#FDEFC0' }
+const TINT = { background: '#E7E4E6' }
 
 function Person({ n, r, i }) {
   const [ok, setOk] = useState(true)
@@ -59,7 +59,7 @@ export function Home() {
           {vid && <video className="hv" autoPlay muted loop playsInline ref={el => { if (el) el.muted = true }}><source src="/images/hero.mp4" type="video/mp4" onError={() => setVid(false)} /></video>}
         </div>
         <div className="w rv">
-          <span className="eb" style={{ color: '#F9A825' }}>{t('Interior design studio')} &middot; {t('Goa')}</span>
+          <span className="eb" style={{ color: '#FAC8CE' }}>{t('Interior design studio')} &middot; {t('Goa')}</span>
           {lang === 'mr' ? <h1>तुमचे घर, तुमच्या पद्धतीने.</h1> : <div key={s} className="hero-h"><h1>We design <em>{SLIDES[s].word}</em> {SLIDES[s].rest}</h1></div>}
           <p className="lead">{t('Natural materials, honest craft and a lot of light, delivered at a price we fix before we start.')}</p>
           <div className="acts"><Link className="btn fill" to="/contact">{t('Transform your space')}</Link><Link className="btn" to="/estimate">{t('Estimate your budget')}</Link></div>
@@ -177,8 +177,9 @@ export function Projects() {
     <>
       <PageHead eb="Portfolio">Spaces we have <em>made</em>.</PageHead>
       <section style={{ paddingTop: 30 }}><div className="w">
+        <p className="pj-intro rv">Every one of these began with a conversation about how people really live, cook, gather and rest. Have a look around.</p>
         <div className="filters rv">{['all', 'Residential', 'Commercial', 'Hospitality'].map(x => <button key={x} className={f === x ? 'on' : ''} onClick={() => setF(x)}>{x === 'all' ? 'All' : x}</button>)}</div>
-        <div className="pgrid">{PROJ.map((p, i) => <Card key={p.id} p={p} i={i} n={PROJ.filter(q => f === 'all' || q.type === f).indexOf(p)} hide={f !== 'all' && p.type !== f} />)}</div>
+        <div className="pgrid">{PROJ.map((p, i) => <Card key={p.id} p={p} i={i} hide={f !== 'all' && p.type !== f} />)}</div>
       </div></section>
       <Cta />
     </>
@@ -203,7 +204,7 @@ export function ProjectPage() {
         <div className="gal rv" style={{ marginTop: 70 }}>{[2, 3, 4].map(n => <Ph key={n} name={`${p.id}-${n}.jpg`} alt={`${p.title} detail ${n}`} k={i + n} ar="4/3" />)}</div>
       </div></section>
       <section className="dk"><div className="w rv">
-        <span className="eb" style={{ color: '#F9A825' }}>Next project</span>
+        <span className="eb" style={{ color: '#FAC8CE' }}>Next project</span>
         <h2><Link to={`/projects/${nx.id}`} style={{ textDecoration: 'none' }}>{nx.title} &rarr;</Link></h2>
       </div></section>
     </>

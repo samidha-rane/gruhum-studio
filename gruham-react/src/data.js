@@ -1,4 +1,4 @@
-export const COL = [['#FFF8E1', '#1E88E5'], ['#FDE7A8', '#002D72'], ['#CFE3F8', '#F9A825'], ['#FFE9B0', '#1E88E5'], ['#BBD8F5', '#002D72'], ['#FFF1C7', '#F9A825']]
+export const COL = [['#E7E4E6', '#7497B3'], ['#FAC8CE', '#674C59'], ['#D6DEE6', '#674C59'], ['#F3E0E3', '#7497B3'], ['#C9D6E2', '#674C59'], ['#EFE9EC', '#FAC8CE']]
 
 export const LINKS = [['About', '/about'], ['Projects', '/projects'], ['3D tour', '/design'], ['Materials', '/materials'], ['Estimate', '/estimate']]
 

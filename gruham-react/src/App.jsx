@@ -11,7 +11,7 @@ function Mark() {
       <g fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 42V22a16 16 0 0 1 32 0v20" /><path d="M17 42V25a7 7 0 0 1 14 0v17" /><path d="M4 42.5h40" />
       </g>
-      <circle cx="24" cy="12.2" r="2.8" fill="#F9A825" />
+      <circle cx="24" cy="12.2" r="2.8" fill="#7497B3" />
     </svg>
   )
 }
