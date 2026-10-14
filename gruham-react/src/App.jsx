@@ -11,7 +11,7 @@ function Mark() {
       <g fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 42V22a16 16 0 0 1 32 0v20" /><path d="M17 42V25a7 7 0 0 1 14 0v17" /><path d="M4 42.5h40" />
       </g>
-      <circle cx="24" cy="12.2" r="2.8" fill="#7497B3" />
+      <circle cx="24" cy="12.2" r="2.8" fill="#0077B6" />
     </svg>
   )
 }
@@ -19,11 +19,28 @@ function Mark() {
 function Layout() {
   const { pathname } = useLocation()
   const [menu, setMenu] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [lb, setLb] = useState(null)
   const [lang, setLang] = useState(() => { try { return localStorage.getItem('lang') || 'en' } catch { return 'en' } })
   const t = s => (lang === 'mr' && MR[s]) || s
 
   useEffect(() => { window.scrollTo(0, 0); setMenu(false) }, [pathname])
+
+  useEffect(() => {
+    let raf = 0
+    const on = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const h = document.documentElement
+        const max = h.scrollHeight - h.clientHeight
+        h.style.setProperty('--sp', max > 0 ? (window.scrollY / max).toFixed(4) : '0')
+        setScrolled(window.scrollY > 24)
+      })
+    }
+    on()
+    window.addEventListener('scroll', on, { passive: true })
+    return () => { window.removeEventListener('scroll', on); cancelAnimationFrame(raf) }
+  }, [])
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -47,17 +64,17 @@ function Layout() {
   return (
     <LangCtx.Provider value={{ lang, setLang }}>
       <LbCtx.Provider value={setLb}>
-        <header className="top"><div className="w">
+        <header className={scrolled ? 'top scrolled' : 'top'}><div className="w">
           <Link className="logo" to="/"><Mark /><b className="mr">गृहम्</b><span>Gruham Studio</span></Link>
           <button className="burger" aria-label="Menu" aria-expanded={menu} onClick={() => setMenu(!menu)}><i /><i /></button>
           <nav aria-label="Main" className={menu ? 'open' : ''}>
-            {LINKS.map(([l, to]) => <NavLink key={to} to={to} className={({ isActive }) => (isActive ? 'on' : '')}>{t(l)}</NavLink>)}
+            {LINKS.map(([l, to]) => <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) => (isActive ? 'on' : '')}>{t(l)}</NavLink>)}
             <button className="lang" onClick={() => setLang(lang === 'en' ? 'mr' : 'en')} aria-label="Switch language">{lang === 'en' ? 'मराठी' : 'English'}</button>
             <Link className="btn sm fill" to="/contact">{t('Book a consultation')}</Link>
           </nav>
         </div></header>
 
-        <main><ErrorBoundary key={pathname}><Outlet /></ErrorBoundary></main>
+        <main key={pathname} className="page"><ErrorBoundary key={pathname}><Outlet /></ErrorBoundary></main>
 
         <footer><div className="w">
           <div className="g">

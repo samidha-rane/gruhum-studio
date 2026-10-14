@@ -1,13 +1,13 @@
-export const COL = [['#E7E4E6', '#7497B3'], ['#FAC8CE', '#674C59'], ['#D6DEE6', '#674C59'], ['#F3E0E3', '#7497B3'], ['#C9D6E2', '#674C59'], ['#EFE9EC', '#FAC8CE']]
+export const COL = [['#CAF0F8', '#0077B6'], ['#90E0EF', '#03045E'], ['#E4F6FB', '#00B4D8'], ['#B9E6F2', '#0077B6'], ['#CAF0F8', '#03045E'], ['#90E0EF', '#0077B6']]
 
-export const LINKS = [['About', '/about'], ['Projects', '/projects'], ['3D tour', '/design'], ['Materials', '/materials'], ['Estimate', '/estimate']]
+export const LINKS = [['Home', '/'], ['About', '/about'], ['Projects', '/projects'], ['3D tour', '/design'], ['Materials', '/materials'], ['Style quiz', '/quiz'], ['Estimate', '/estimate']]
 
 export const PROJ = [
-  { id: 'mango-house', pal: ['#B9633F', '#5B3A24', '#F2EBDD'], title: 'The Mango House', type: 'Residential', loc: 'Assagao, Goa', year: '2025', area: '3,200 sq ft', scope: 'Full interiors, custom joinery, lighting', desc: 'A Portuguese-era bungalow reworked for a family of five, keeping the laterite walls and adding warm oak, lime plaster and deep verandah seating.' },
-  { id: 'cafe-saudade', pal: ['#6B8E6B', '#C9B28A', '#F9A825'], title: 'Cafe Saudade', type: 'Hospitality', loc: 'Panjim, Goa', year: '2024', area: '1,450 sq ft', scope: 'Concept, furniture, branding touchpoints', desc: 'A neighbourhood cafe built around a long terrazzo counter, hand-glazed tiles and a ceiling of woven cane that softens the room.' },
-  { id: 'loft-twelve', pal: ['#F0E6D2', '#8A5A3B', '#1E88E5'], title: 'Loft Twelve', type: 'Residential', loc: 'Candolim, Goa', year: '2025', area: '1,100 sq ft', scope: 'Space planning, built-ins, styling', desc: 'A compact retreat that borrows from the village house: a daybed that works as seating and sleeping, niches cut into thick walls, and a small green patio.' },
-  { id: 'harbour-office', pal: ['#E7E4DC', '#C8A36B', '#1F2A44'], title: 'Harbour Office', type: 'Commercial', loc: 'Vasco, Goa', year: '2023', area: '4,800 sq ft', scope: 'Workplace strategy, interiors, delivery', desc: 'A shipping office turned calm and daylit, with acoustic timber panels, a green meeting courtyard and desks that reconfigure by the week.' },
-  { id: 'villa-palma', pal: ['#E5E0D2', '#7A8F6A', '#D9C7A0'], title: 'Villa Palma', type: 'Residential', loc: 'Siolim, Goa', year: '2024', area: '5,600 sq ft', scope: 'Architecture liaison, interiors, landscape styling', desc: 'A four-bedroom villa arranged around a central pool court, with open living spaces, stone floors and a palette taken from the garden.' },
+  { id: 'mango-house', imgs: ['blue-hall.jpg', 'blue-kitchen.jpg', 'blue-balcony.jpg', 'plant-wall.jpg'], pal: ['#1F4FD8', '#D63C73', '#E8DCC5'], title: 'The Mango House', type: 'Residential', loc: 'Assagao, Goa', year: '2025', area: '3,200 sq ft', scope: 'Full interiors, custom joinery, lighting', desc: 'A Portuguese-era bungalow reworked for a family of five, with deep blue lime-washed walls, arched niches for books, hand-painted tiles and a verandah that opens onto the garden.' },
+  { id: 'cafe-saudade', imgs: ['cafe-teal.jpg', 'cafe-booths.jpg', 'cafe-neon.jpg', 'courtyard-cafe.jpg'], pal: ['#0E8FA8', '#F2F2F2', '#C58A4B'], title: 'Cafe Saudade', type: 'Hospitality', loc: 'Panjim, Goa', year: '2024', area: '1,450 sq ft', scope: 'Concept, furniture, branding touchpoints', desc: 'A neighbourhood cafe built around teal banquettes, marble-top tables and arched panels that glow with soft light at dusk.' },
+  { id: 'loft-twelve', imgs: ['living-mural.jpg', 'plant-wall.jpg', 'mosaic-courtyard.jpg'], pal: ['#0F6FA0', '#F2B705', '#3FAE8C'], title: 'Loft Twelve', type: 'Residential', loc: 'Candolim, Goa', year: '2025', area: '1,100 sq ft', scope: 'Space planning, built-ins, styling', desc: 'A compact apartment designed around one big idea: a leafy painted wall, a deep blue sofa and light, low furniture that keeps the room open.' },
+  { id: 'harbour-office', imgs: ['office-ribbed-1.jpg', 'office-ribbed-2.jpg', 'office-colour.jpg'], pal: ['#5B8DB8', '#B87A45', '#E8E6DE'], title: 'Harbour Office', type: 'Commercial', loc: 'Vasco, Goa', year: '2023', area: '4,800 sq ft', scope: 'Workplace strategy, interiors, delivery', desc: 'A calm, daylit office with ribbed blue partitions, timber cabinets and rounded glass windows that keep the floor open and bright.' },
+  { id: 'villa-palma', imgs: ['pool-courtyard.jpg', 'courtyard-statue.jpg', 'mosaic-courtyard.jpg', 'blue-balcony.jpg'], pal: ['#1E4DA1', '#E8E4DA', '#2FA6C9'], title: 'Villa Palma', type: 'Residential', loc: 'Siolim, Goa', year: '2024', area: '5,600 sq ft', scope: 'Architecture liaison, interiors, landscape styling', desc: 'A villa arranged around a blue-and-white courtyard with a plunge pool, hand-painted tiles and a shaded pergola.' },
 ]
 
 export const SERV = [
@@ -59,7 +59,9 @@ export const FAQ = [
   ['What is the first step?', 'Book a free 30-minute consultation. We will talk through your space, your timeline and a rough budget range.'],
 ]
 
-export const ROOMS = ['Living room', 'Verandah', 'Courtyard', 'Open-air bath', 'Sitting room', 'Workspace']
+export const ROOMS = ['Living room', 'Kitchen', 'Verandah', 'Courtyard', 'Cafe corner', 'Workspace']
+export const ROOM_IMGS = ['living-mural.jpg', 'blue-kitchen.jpg', 'blue-balcony.jpg', 'pool-courtyard.jpg', 'cafe-teal.jpg', 'office-ribbed-1.jpg']
+export const INSTA_IMGS = ['blue-balcony.jpg', 'plant-wall.jpg', 'cafe-neon.jpg', 'mosaic-courtyard.jpg', 'office-colour.jpg', 'pool-courtyard.jpg']
 export const TEAM = [['Ira Kamat', 'Founder and principal designer'], ["Neil D'Souza", 'Head of site delivery'], ['Tara Prabhu', 'Senior designer, hospitality']]
 
 export const WA = '919876543210'
@@ -99,7 +101,7 @@ export const RES = [
 ]
 
 export const MR = {
-  About: 'आमच्याबद्दल', Services: 'सेवा', Projects: 'प्रकल्प', Materials: 'साहित्य', 'Style quiz': 'शैली चाचणी', Estimate: 'खर्चाचा अंदाज', Journal: 'लेख',
+  Home: 'मुख्यपृष्ठ', About: 'आमच्याबद्दल', Services: 'सेवा', Projects: 'प्रकल्प', Materials: 'साहित्य', 'Style quiz': 'शैली चाचणी', Estimate: 'खर्चाचा अंदाज', Journal: 'लेख',
   'Book a consultation': 'सल्लामसलत बुक करा', 'Transform your space': 'तुमची जागा बदला', 'Estimate your budget': 'बजेटचा अंदाज घ्या',
   'Interior design studio': 'इंटिरिअर डिझाइन स्टुडिओ', Goa: 'गोवा',
   'Natural materials, honest craft and a lot of light, delivered at a price we fix before we start.': 'नैसर्गिक साहित्य, प्रामाणिक कारागिरी आणि सुरुवातीलाच ठरवलेली किंमत.',

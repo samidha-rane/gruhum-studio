@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useLang } from './components.jsx'
+import { FOCUS, useLang } from './components.jsx'
 export default function Card({ p, i = 0, hide }) {
   const { t } = useLang()
   const [ok, setOk] = useState(true)
@@ -17,10 +17,11 @@ export default function Card({ p, i = 0, hide }) {
         <div className="pj-img" style={{ background: p.pal && p.pal[0] }}>
           {ok && (
             <img
-              src={`/images/${p.id}-1.jpg`}
+              src={`/images/${p.imgs[0]}`}
               alt={`${p.title}, ${p.type} interior in ${p.loc}`}
               loading="lazy"
               decoding="async"
+              style={{ objectPosition: FOCUS[p.imgs[0].replace(/\.[a-z]+$/, '')] || 'center' }}
               onError={() => setOk(false)}
             />
           )}

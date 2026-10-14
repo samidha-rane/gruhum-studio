@@ -80,7 +80,7 @@ export default function Configurator() {
           {TABS.map((t, i) => <button key={t} role="tab" aria-selected={tab === i} className={tab === i ? 'on' : ''} onClick={() => setTab(i)}>{t}</button>)}
         </div>
 
-        <div className="cfg-body">
+        <div className="cfg-body" key={tab}>
           {tab === 0 && (
             <>
               <div className="cg"><label>Space</label>

@@ -1,19 +1,21 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom'
 import BeforeAfter from './BeforeAfter.jsx'
-import { Cta, Estimator, Faq, PageHead, PaySec, Ph, Quote, Srow, useLang, useSeo } from './components.jsx'
+import { Count, Cta, Estimator, Faq, PageHead, PaySec, Ph, Quote, Srow, useLang, useSeo } from './components.jsx'
 import Card from './ProjectCard.jsx'
-import { FAQ, FORM, MATERIALS, POSTS, PROJ, QUIZ, QUOTES, RES, ROOMS, SERV, STEPS, TEAM } from './data.js'
+import { FAQ, FORM, MATERIALS, POSTS, PROJ, QUIZ, QUOTES, RES, INSTA_IMGS, ROOMS, ROOM_IMGS, SERV, STEPS, TEAM } from './data.js'
 
 const Configurator = lazy(() => import('./Configurator.jsx'))
 
+const MARQ = ['Homes', 'Cafes', 'Offices', 'Courtyards', '3D tours', 'Goa']
+
 const SLIDES = [
-  { word: 'homes', rest: 'you will never want to leave.', img: 'hero-home.jpg', alt: 'Bright Goan living room with arched doors and a high timber ceiling' },
-  { word: 'cafes', rest: 'people keep coming back to.', img: 'hero-1.jpg', alt: 'Open courtyard with timber lounge chairs and a red-trunked tree' },
-  { word: 'offices', rest: 'people enjoy working in.', img: 'hero-office.jpg', alt: 'Calm daylit office with timber desks and plants' },
-  { word: 'courtyards', rest: 'where the whole family gathers.', img: 'hero-courtyard.jpg', alt: 'Indoor courtyard filled with tropical plants and curved seating' },
+  { word: 'homes', rest: 'you will never want to leave.', img: 'hero-homes.jpg', alt: 'Blue arched niches with books, cushioned benches and white garden chairs' },
+  { word: 'cafes', rest: 'people keep coming back to.', img: 'cafe-booths.jpg', alt: 'Teal banquettes and timber tables under hanging lights in a cafe' },
+  { word: 'offices', rest: 'people enjoy working in.', img: 'hero-offices.jpg', alt: 'Ribbed blue partitions and an oval glass window in a calm office' },
+  { word: 'courtyards', rest: 'where the whole family gathers.', img: 'courtyard-statue.jpg', alt: 'Courtyard with a pool, a carved doorway and turquoise floor' },
 ]
-const TINT = { background: '#E7E4E6' }
+const TINT = { background: '#CAF0F8' }
 
 function Person({ n, r, i }) {
   const [ok, setOk] = useState(true)
@@ -59,7 +61,7 @@ export function Home() {
           {vid && <video className="hv" autoPlay muted loop playsInline ref={el => { if (el) el.muted = true }}><source src="/images/hero.mp4" type="video/mp4" onError={() => setVid(false)} /></video>}
         </div>
         <div className="w rv">
-          <span className="eb" style={{ color: '#FAC8CE' }}>{t('Interior design studio')} &middot; {t('Goa')}</span>
+          <span className="eb" style={{ color: '#90E0EF' }}>{t('Interior design studio')} &middot; {t('Goa')}</span>
           {lang === 'mr' ? <h1>तुमचे घर, तुमच्या पद्धतीने.</h1> : <div key={s} className="hero-h"><h1>We design <em>{SLIDES[s].word}</em> {SLIDES[s].rest}</h1></div>}
           <p className="lead">{t('Natural materials, honest craft and a lot of light, delivered at a price we fix before we start.')}</p>
           <div className="acts"><Link className="btn fill" to="/contact">{t('Transform your space')}</Link><Link className="btn" to="/estimate">{t('Estimate your budget')}</Link></div>
@@ -67,19 +69,23 @@ export function Home() {
         </div>
       </section>
 
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee-track">{[0, 1].map(r => MARQ.map(w => <span key={r + w}>{w}</span>))}</div>
+      </div>
+
       <div className="trust"><div className="w tr">
-        <div><b>10 years</b><span>warranty on joinery</span></div>
+        <div><b><Count to={10} /> years</b><span>warranty on joinery</span></div>
         <div><b>Fixed price</b><span>quotation, no surprises</span></div>
         <div><b>Weekly</b><span>designer site visits</span></div>
-        <div><b>140+</b><span>spaces delivered</span></div>
-        <div><b>90 days</b><span>typical full-home timeline</span></div>
+        <div><b><Count to={140} suffix="+" /></b><span>spaces delivered</span></div>
+        <div><b><Count to={90} /> days</b><span>typical full-home timeline</span></div>
       </div></div>
 
       <RoomSection />
 
       <section><div className="w">
         <div className="head rv"><div><span className="eb">{t('Selected work')}</span><h2>{t('Recent projects')}</h2></div><Link className="btn" to="/projects">{t('All projects')}</Link></div>
-        <div className="pgrid">{PROJ.slice(0, 4).map((p, i) => <Card key={p.id} p={p} i={i} />)}</div>
+        <div className="pgrid">{PROJ.slice(0, 3).map((p, i) => <Card key={p.id} p={p} i={i} />)}</div>
       </div></section>
 
       <section style={TINT}><div className="w">
@@ -90,7 +96,7 @@ export function Home() {
       <section><div className="w">
         <div className="head rv"><div><span className="eb">{t('Ideas by room')}</span><h2>{t('Start with the room you love most')}</h2></div></div>
         <div className="rooms">{ROOMS.map((n, i) => (
-          <Link key={n} className="rm rv" to="/contact"><Ph name={`room-${i + 1}.jpg`} alt={`${n} design idea`} k={i} ar="4/5" lb={false} /><span>{n}</span></Link>
+          <Link key={n} className="rm rv" to="/contact"><Ph name={ROOM_IMGS[i]} alt={`${n} design idea`} k={i} ar="4/5" lb={false} /><span>{n}</span></Link>
         ))}</div>
       </div></section>
 
@@ -127,7 +133,7 @@ export function Home() {
 
       <section><div className="w">
         <div className="head rv"><div><span className="eb">Gallery</span><h2>Moments from our sites</h2></div></div>
-        <div className="insta">{[0, 1, 2, 3, 4, 5].map(i => <Ph key={i} name={`insta-${i + 1}.jpg`} alt={`Studio moment ${i + 1}`} k={i} ar="1" />)}</div>
+        <div className="insta">{[0, 1, 2, 3, 4, 5].map(i => <Ph key={i} name={INSTA_IMGS[i]} alt={`Studio moment ${i + 1}`} k={i} ar="1" />)}</div>
       </div></section>
 
       <Cta />
@@ -141,7 +147,7 @@ export function About() {
     <>
       <PageHead eb="About us">A small studio with <em>long</em> memories.</PageHead>
       <section style={{ paddingTop: 30 }}><div className="w two">
-        <div className="rv"><Ph name="about.jpg" alt="A Gruham Studio interior with a carved timber ceiling and red walls" k={2} ar="4/5" /></div>
+        <div className="rv"><Ph name="mosaic-courtyard.jpg" alt="A courtyard with a hand-laid mosaic floor, a tree and stained-glass windows" k={2} ar="4/5" /></div>
         <div className="rv">
           <span className="eb">Why Gruham?</span>
           <h2 style={{ marginBottom: 26 }}>Our first project was a home. It is still lived in, happily.</h2>
@@ -197,14 +203,19 @@ export function ProjectPage() {
     <>
       <section className="pagehead"><div className="w rv"><span className="eb">{p.type} &middot; {p.loc}</span><h1>{p.title}</h1></div></section>
       <section style={{ paddingTop: 20 }}><div className="w">
-        <div className="rv"><Ph name={`${p.id}-1.jpg`} alt={`${p.title} main view`} k={i} ar="16/9" /></div>
-        <div className="facts rv"><div><span>Location</span>{p.loc}</div><div><span>Year</span>{p.year}</div><div><span>Size</span>{p.area}</div><div><span>Scope</span>{p.scope}</div></div>
-        <div className="palrow rv"><span className="meta">Palette</span>{p.pal.map(c => <i key={c} style={{ background: c }} title={c} />)}</div>
-        <div className="two"><h2 className="rv">The brief</h2><p className="rv">{p.desc}</p></div>
-        <div className="gal rv" style={{ marginTop: 70 }}>{[2, 3, 4].map(n => <Ph key={n} name={`${p.id}-${n}.jpg`} alt={`${p.title} detail ${n}`} k={i + n} ar="4/3" />)}</div>
+        <div className="proj-top">
+          <div className="rv"><Ph name={p.imgs[0]} alt={`${p.title} main view`} k={i} ar="4/5" /></div>
+          <div className="proj-info rv">
+            <div className="facts"><div><span>Location</span>{p.loc}</div><div><span>Year</span>{p.year}</div><div><span>Size</span>{p.area}</div><div><span>Scope</span>{p.scope}</div></div>
+            <div className="palrow"><span className="meta">Palette</span>{p.pal.map(c => <i key={c} style={{ background: c }} title={c} />)}</div>
+            <h2>The brief</h2>
+            <p>{p.desc}</p>
+          </div>
+        </div>
+        <div className="gal3 rv">{p.imgs.slice(1).map((n, k) => <Ph key={n} name={n} alt={`${p.title} detail ${k + 1}`} k={i + k + 1} ar="4/5" />)}</div>
       </div></section>
       <section className="dk"><div className="w rv">
-        <span className="eb" style={{ color: '#FAC8CE' }}>Next project</span>
+        <span className="eb" style={{ color: '#90E0EF' }}>Next project</span>
         <h2><Link to={`/projects/${nx.id}`} style={{ textDecoration: 'none' }}>{nx.title} &rarr;</Link></h2>
       </div></section>
     </>

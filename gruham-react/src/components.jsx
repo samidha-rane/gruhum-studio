@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { COL, MR, PAY } from './data'
 
@@ -11,6 +11,12 @@ export function useLang() {
 }
 
 const EXTS = ['jpg', 'jpeg', 'png', 'webp']
+export const FOCUS = {
+  'blue-hall': '50% 65%', 'blue-kitchen': '50% 55%', 'courtyard-cafe': '50% 55%', 'blue-balcony': '50% 30%',
+  'plant-wall': '50% 50%', 'office-ribbed-1': '50% 45%', 'office-ribbed-2': '50% 50%', 'office-colour': '50% 55%',
+  'living-mural': '50% 70%', 'cafe-neon': '50% 60%', 'cafe-teal': '50% 50%', 'mosaic-courtyard': '50% 40%',
+  'pool-courtyard': '50% 70%', 'courtyard-statue': '36% 55%', 'cafe-booths': '28% 50%', 'hero-homes': '50% 45%',
+}
 
 export function Ph({ name, alt = '', k = 0, ar, lb = true, cls = '' }) {
   const open = useContext(LbCtx)
@@ -21,7 +27,7 @@ export function Ph({ name, alt = '', k = 0, ar, lb = true, cls = '' }) {
   const style = { '--c1': c1, '--c2': c2, ...(ar ? { '--ar': ar } : {}) }
   return (
     <figure className={`ph ${cls}`} style={style} data-lb={lb ? '' : undefined} onClick={lb ? () => open({ name, alt, k }) : undefined}>
-      {ext < EXTS.length && <img key={ext} src={`/images/${base}.${EXTS[ext]}`} alt={alt} loading="lazy" onError={() => setExt(e => e + 1)} />}
+      {ext < EXTS.length && <img key={ext} src={`/images/${base}.${EXTS[ext]}`} alt={alt} style={{ objectPosition: FOCUS[base] || 'center' }} loading="lazy" onError={() => setExt(e => e + 1)} />}
     </figure>
   )
 }
@@ -47,7 +53,7 @@ export function Cta() {
   const { t } = useLang()
   return (
     <section className="dk"><div className="w rv">
-      <span className="eb" style={{ color: '#FAC8CE' }}>{t('Start here')}</span>
+      <span className="eb" style={{ color: '#90E0EF' }}>{t('Start here')}</span>
       <h2>Let us talk about <em>your</em> space.</h2>
       <p className="lead">A free 30-minute consultation. No pressure, just a good conversation.</p>
       <p style={{ marginTop: 32 }}><Link className="btn gold" to="/contact">{t('Transform your space')}</Link></p>
@@ -61,7 +67,7 @@ export function Srow({ n, t, d }) {
 
 export function PaySec() {
   return (
-    <section style={{ background: '#E7E4E6' }}><div className="w">
+    <section style={{ background: '#CAF0F8' }}><div className="w">
       <div className="rv" style={{ marginBottom: 40 }}><span className="eb">Transparent payments</span><h2>What you pay, and when</h2></div>
       {PAY.map(([a, b, c]) => <Srow key={b} n={a} t={b} d={c} />)}
     </div></section>
@@ -114,7 +120,7 @@ export function Estimator() {
         <div><label>Finish</label>{grp('fin', [['Essential', 0], ['Signature', 1], ['Luxe', 2]])}</div>
       </div>
       <div className="eres">
-        <span className="eb" style={{ color: '#FAC8CE' }}>Indicative estimate</span>
+        <span className="eb" style={{ color: '#90E0EF' }}>Indicative estimate</span>
         <b className="eamt">₹{lakh(b * 0.9)} to {lakh(b * 1.15)} lakh</b>
         <p>A rough range only. The final quote depends on site conditions, materials and your design choices.</p>
         <Link className="btn" to="/contact">Get an exact quote</Link>
@@ -131,4 +137,27 @@ export function Faq({ items }) {
       <p>{a}</p>
     </details>
   ))
+}
+
+export function Count({ to, suffix = '' }) {
+  const ref = useRef(null)
+  const [n, setN] = useState(0)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return undefined
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return
+      io.disconnect()
+      const t0 = performance.now()
+      const step = t => {
+        const p = Math.min((t - t0) / 1500, 1)
+        setN(Math.round(to * (1 - Math.pow(1 - p, 3))))
+        if (p < 1) requestAnimationFrame(step)
+      }
+      requestAnimationFrame(step)
+    }, { threshold: 0.4 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [to])
+  return <span ref={ref}>{n}{suffix}</span>
 }
